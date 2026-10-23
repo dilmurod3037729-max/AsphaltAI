@@ -36,3 +36,8 @@ Tekshiruv: `Vision/reward_audit.py` (komponent hissalari, progress bilan korrely
 4. `cd Vision; py train.py --export; py evaluate.py; py events_sheet.py; py reward_audit.py`.
 
 Bog'liq loyihalar: `V:\Projects\TapperV2` (bot, coach), `V:\Projects\TrackGeo` (jmo geometriya), `V:\Projects\TapperV2\tools\ObjectLab` (ob'ekt qirqish).
+
+## Muallif va litsenziya
+Loyiha muallifi va egasi — [dilmurod3037729-max](https://github.com/dilmurod3037729-max). © 2026.
+Kod [MIT litsenziyasi](LICENSE) asosida ochiq: foydalanish, o'zgartirish va tarqatish mumkin, faqat mualliflik va litsenziya matni saqlanishi shart.
+Asphalt Legends — Gameloft'ning savdo belgisi; bu loyiha Gameloft bilan bog'liq emas va o'yin fayllari/kontentini o'z ichiga olmaydi.
