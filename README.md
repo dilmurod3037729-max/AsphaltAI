@@ -1,5 +1,12 @@
 # Asphalt AI
 
+**English summary.** A research project: an AI that plays *Asphalt Legends* (PC) **from pixels only**, through a virtual
+gamepad, with no access to game memory or code. Core is a DreamerV3-style world model (RSSM, 48x96 frames) with heads for
+crash (within 1 s), stuck and speed; a planner imagines 36 short plans (9 analog stick values x drift x nitro) and picks the
+safest fast one. Trained on its own races, which it collects in a loop (race -> dataset -> fine-tune -> held-out check).
+Current: Nevada / The Narrows, one car, 100% finishes, ~160 s per race, ~2.9 crashes/min; crash-prediction AUC 0.745 on
+held-out races. **Work in progress** — feedback, ideas and issues are welcome (Issues / Discussions). Docs below are in Uzbek.
+
 Asphalt Legends uchun ekranni ko'rib o'ynaydigan AI. Trassaga emas, ko'rinadigan hodisaga bog'lanadi: ko'rish o'rganiladi,
 shuning uchun tayyor AI istalgan trassada o'yinni o'zi baholab o'ynay oladi.
 
