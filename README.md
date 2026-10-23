@@ -3,6 +3,56 @@
 Asphalt Legends uchun ekranni ko'rib o'ynaydigan AI. Trassaga emas, ko'rinadigan hodisaga bog'lanadi: ko'rish o'rganiladi,
 shuning uchun tayyor AI istalgan trassada o'yinni o'zi baholab o'ynay oladi.
 
+> **Holat: izlanish (research) bosqichida.** Bu tayyor mahsulot emas — tajriba loyihasi. Natijalar, kod tuzilmasi va
+> yondashuv o'zgarib turadi; ba'zi skriptlar faqat muallif kompyuteri sozlamalariga (yo'llar, emulator, ViGEm) moslangan.
+
+![Dreamer o'zi haydaydi](docs/race.gif)
+
+*Faqat Dreamer haydaydi (bot yoki odam yo'q): pastdagi ustunlar — 5 yo'nalish bo'yicha 1 s ichida urilish xavfi
+(qizil = xavfli), yuqorida analog joystik qiymati, nitro va drift. Private Room, Nevada — The Narrows.*
+
+## Hozirgi natijalar (2026-10-23)
+| | |
+|---|---|
+| Trassa | Nevada — The Narrows (Private Room, bitta mashina: Mitsubishi Lancer Evolution X) |
+| Boshqaruv | faqat Dreamer world model + reja tuzuvchi (36 reja: 9 joystik qiymati x drift x nitro), analog stik |
+| Marra | aylanishlarda 60–100% |
+| Marra vaqti | o'rtacha 160–168 s (eng yaxshi poyga 157.6 s) |
+| Urilish | daqiqasiga 2.4–3.8 |
+| World model (ko'rilmagan PCD1 poygalarida) | urilishni 1 s oldin sezish AUC 0.74, tiqilish AUC 0.99, tezlik xatosi 11.5 mph |
+
+![O'qitish aylanishlari](docs/progress.png)
+
+Ochiq muammolar (izlanish davom etyapti): devor bo'ylab "sirpanib" yurish (tezlik sekin tushadi, model buni xavf deb
+sezmaydi), driftni uzoq ushlab turish, oldindan rejalash; haydash sifati world model ko'rsatkichlari bilan birga o'smayapti.
+
+### Dreamer nimani ko'rmaydi
+![Ko'r nuqtalar](docs/blind_spots.jpg)
+
+*`Vision/dream_diag.py` chiqishi: haqiqiy kadr | Dreamer ichki tasviri | Dreamer 1 s keyingi bashorati | haqiqat 1 s keyin |
+xato xaritasi (yorug' = model ko'rmagan joy). Qatorlar — sezilmagan urilishlar.*
+
+## Namunalar
+```bash
+# 1) Ma'lumot: poygalarni yozib olish (PC, yashirin oyna + virtual gamepad), faqat Dreamer haydaydi
+py tools/pc_agent.py --tag N1023_test --races 5 --dream-only --dream-eps 0.1 --private
+
+# 2) Yozuvlarni o'qitish to'plamiga yig'ish (data/ds2)
+py Vision/build_ds2.py
+
+# 3) World model'ni davom ettirib o'qitish (PCD1 tekshiruv uchun chetda qoladi, PC poygalari 50%)
+py tools/safe_run.py 3000 -- py -u Vision/dreamer.py --steps 30000 --bs 8 --T 48 --resume --exclude PCD1 --pc-frac 0.5
+
+# 4) Tekshiruv: urilish/tiqilish AUC, tezlik xatosi, ko'r nuqtalar rasmi -> data/diag_PCD1/
+py Vision/dream_diag.py PCD1 cpu
+
+# 5) To'liq tsikl: poyga -> yig'ish -> o'qitish -> tekshiruv (yomonlashsa qaytariladi), belgilangan soatgacha
+py tools/overnight.py --until 20:00 --races 5
+
+# poyga videosi (joystik/nitro/drift ko'rsatkichlari bilan): pc_agent --video 1 + tools/pc_video.py
+```
+`tools/safe_run.py` GPU yuklamasi/VRAM 80% dan oshsa jarayonni to'xtatadi (kompyuter qotmasligi uchun).
+
 ## Tuzilma
 | Papka | Vazifa |
 |---|---|
