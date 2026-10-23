@@ -1,0 +1,33 @@
+# ma'lumot va natijalar (60+ GB) — repoda faqat kod
+/data/
+/human data/
+/Vision/out/
+/Vision/data/
+
+# o'yin kadrlari/skrinshotlari (Gameloft kontenti, o'yinchi nomlari)
+/tools/screens/
+/App/Assets/t*.png
+/Depth/*.png
+
+# modellar va build natijalari
+*.pt
+*.pth
+*.onnx
+*.npy
+*.bin
+*.u8
+*.apk
+*.mp4
+/App/bin/
+/App/obj/
+__pycache__/
+*.pyc
+*.bak
+*.bak_*
+.vs/
+/Speed/bin/
+/Speed/obj/
+
+# o'yin xotirasini o'qish tajribalari (to'xtatilgan yo'nalish) — ommaviy repoga emas
+/tools/memscan/
+/tools/pc_mem.py

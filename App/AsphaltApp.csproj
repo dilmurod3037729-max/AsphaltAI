@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>26</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationId>space.asphaltai</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <RuntimeIdentifiers>android-x64;android-arm64</RuntimeIdentifiers>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Core/*.cs" Link="Core/%(Filename)%(Extension)" />
+    <AndroidAsset Include="Assets/templates.txt" />
+    <AndroidAsset Include="Assets/seg.onnx" />
+    <AndroidAsset Include="Assets/depth.onnx" />
+    <AndroidAsset Include="Assets/vision.onnx" Condition="Exists('Assets/vision.onnx')" />
+    <AndroidAsset Include="Assets/vision.ver" Condition="Exists('Assets/vision.ver')" />
+    <AndroidAsset Include="Assets/dist_templates.txt" Condition="Exists('Assets/dist_templates.txt')" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1" />
+    <AndroidAsset Include="Assets/t*.png" />
+  </ItemGroup>
+</Project>
